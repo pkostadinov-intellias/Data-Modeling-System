@@ -28,6 +28,7 @@ export class UserService {
   }
 
   @logger
+  @RoleGuard(Role.ADMIN)
   updateUser(caller: User, userId: string, updatedData: Partial<User>): User {
     const existingUser = this.db.findById(userId);
 
