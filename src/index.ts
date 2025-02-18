@@ -10,7 +10,11 @@ console.log("\n===== 🧐 Fetching Users Before Any Are Created =====");
 try {
   console.log(userService.getAllUsers({} as any)); // Should throw an error
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== ✅ Creating Users =====");
@@ -28,9 +32,13 @@ console.log("\n===== 🔍 Fetching a User By ID =====");
 // 3️⃣ Fetch a specific user
 try {
   console.log("Fetching Beti's profile:");
-  console.log(userService.getUserById(admin, beti.id)); // Should return Beti
+  console.log(userService.getUserById(admin, beti.id));
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== ✍️ Updating User Email =====");
@@ -39,9 +47,13 @@ console.log("\n===== ✍️ Updating User Email =====");
 try {
   userService.updateUser(admin, beti.id, { email: "bbolyarska@abv.bg" });
   console.log("✅ User updated successfully.");
-  console.log(userService.getUserById(admin, beti.id)); // Verify update
+  console.log(userService.getUserById(admin, beti.id));
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== 🚫 Attempting Unauthorized Update =====");
@@ -50,7 +62,11 @@ console.log("\n===== 🚫 Attempting Unauthorized Update =====");
 try {
   userService.updateUser(kalata, admin.id, { email: "hacked@example.com" });
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== 🗑️ Attempting to Delete a User =====");
@@ -59,7 +75,11 @@ console.log("\n===== 🗑️ Attempting to Delete a User =====");
 try {
   userService.deleteUser(kalata, beti.id);
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== 🗑️ Deleting a User as Admin =====");
@@ -69,7 +89,11 @@ try {
   userService.deleteUser(admin, beti.id);
   console.log("✅ User deleted successfully.");
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== 🔎 Trying to Fetch Deleted User =====");
@@ -78,7 +102,11 @@ console.log("\n===== 🔎 Trying to Fetch Deleted User =====");
 try {
   console.log(userService.getUserById(admin, beti.id));
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== 🗑️ Trying to Delete Non-existent User =====");
@@ -87,7 +115,11 @@ console.log("\n===== 🗑️ Trying to Delete Non-existent User =====");
 try {
   userService.deleteUser(admin, "non-existent-id");
 } catch (error) {
-  console.error(`❌ Error: ${error.message}`);
+  if (error instanceof Error) {
+    console.error(`❌ Error: ${error.message}`);
+  } else {
+    console.error("❌ Unknown error occurred:", error);
+  }
 }
 
 console.log("\n===== 🎉 All tests completed! =====");
