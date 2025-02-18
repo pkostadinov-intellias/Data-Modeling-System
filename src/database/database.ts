@@ -1,4 +1,6 @@
-export class Database<T extends { id: string }> {
+import { Entity } from "../entities/base-entities";
+
+export class Database<T extends Entity> {
   private storage: Map<string, T> = new Map();
 
   save(entity: T): T {

@@ -6,12 +6,20 @@ import { Role } from "../utils/enums";
 export class UserService {
   private db = new Database<User>();
 
-  getAllUsers(caller: User): User[] | undefined {
-    return this.db.findAll();
+  getAllUsers(caller: User): User[] {
+    const users = this.db.findAll();
+    if (!users || users.length === 0) {
+      throw new Error("No users found");
+    }
+    return users;
   }
 
-  getUserById(caller: User, id: string): User | undefined {
-    return this.db.findById(id);
+  getUserById(caller: User, id: string): User {
+    const user = this.db.findById(id);
+    if (!user) {
+      throw new Error(`User with ID ${id} not found`);
+    }
+    return user;
   }
 
   createUser(name: string, email: string, role: Role): User {
@@ -34,15 +42,16 @@ export class UserService {
     return this.db.save(newUser);
   }
 
+  @logger
   @RoleGuard(Role.ADMIN)
   deleteUser(caller: User, userId: string) {
-    console.log(userId, "id in services");
     const user = this.db.findById(userId);
 
     if (!user) {
       throw new Error(`Entity with this id: ${userId} , doesn't exist. `);
     }
 
-    return this.db.delete(userId);
+    this.db.delete(userId);
+    return user;
   }
 }

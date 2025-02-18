@@ -1,3 +1,5 @@
+import { User } from "../entities/user";
+
 export function logger(
   target: any,
   propertyKey: string,
@@ -7,7 +9,7 @@ export function logger(
 
   descriptor.value = function (...args: any) {
     const result = original.call(this, ...args);
-    console.log("result: ", result);
+    console.log(`result from ${propertyKey}: `, result);
     return result;
   };
 }
@@ -20,7 +22,7 @@ export function RoleGuard(role: string) {
   ) {
     const original = descriptor.value;
 
-    descriptor.value = function (user: any, ...args: any) {
+    descriptor.value = function (user: User, ...args: any) {
       if (user.role !== role) {
         throw new Error(
           `You don't have this permissions. Only users with ${role} role are authorized. `

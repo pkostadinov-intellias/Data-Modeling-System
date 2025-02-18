@@ -7,10 +7,10 @@ const admin = userService.createUser("Paco", "plamen@gmail.bg", Role.ADMIN);
 const beti = userService.createUser("Beti", "beti@abv.bg", Role.USER);
 const kalata = userService.createUser("Kalata", "kalata@yahoo.bg", Role.USER);
 
+userService.updateUser(kalata, beti.id, { email: "bbolyarska@abv.bg" });
+
 try {
-  userService.deleteUser(kalata, beti.id);
+  userService.deleteUser(admin, beti.id);
 } catch (error) {
   console.log(error.message);
 }
-
-userService.updateUser(kalata, beti.id, { email: "bbolyarska@abv.bg" });
