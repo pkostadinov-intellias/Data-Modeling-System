@@ -25,7 +25,7 @@ export function RoleGuard(role: string) {
     descriptor.value = function (user: User, ...args: any) {
       if (user.role !== role) {
         throw new Error(
-          `You don't have this permissions. Only users with ${role} role are authorized. `
+          `User ${user.name} doesn't have this permissions. Only users with ${role} role are authorized. `
         );
       }
 

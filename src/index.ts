@@ -10,7 +10,7 @@ const kalata = userService.createUser("Kalata", "kalata@yahoo.bg", Role.USER);
 userService.updateUser(kalata, beti.id, { email: "bbolyarska@abv.bg" });
 
 try {
-  userService.deleteUser(admin, beti.id);
+  userService.deleteUser(kalata, beti.id);
 } catch (error) {
   console.log(error.message);
 }
