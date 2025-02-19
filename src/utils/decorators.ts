@@ -1,7 +1,7 @@
 import { User } from "../entities/user";
 
 export function logger(
-  target: any,
+  target: unknown,
   propertyKey: string,
   descriptor: PropertyDescriptor
 ) {
@@ -16,7 +16,7 @@ export function logger(
 
 export function RoleGuard(role: string) {
   return function (
-    target: any,
+    target: unknown,
     propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
