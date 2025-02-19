@@ -1,6 +1,7 @@
 import { Database } from "../database/database";
+import { logger } from "../decorators/logger";
+import { RoleGuard } from "../decorators/role-guard";
 import { User } from "../entities/user";
-import { logger, RoleGuard } from "../utils/decorators";
 import { Role } from "../utils/enums";
 
 export class UserService {
