@@ -7,7 +7,7 @@ export function logger(
 
   descriptor.value = function (...args: unknown[]) {
     const result = original.call(this, ...args);
-    console.log(`result from ${propertyKey}: `, result);
+    console.log(`result from logger decorator: ${propertyKey}: `, result);
     return result;
   };
 }
